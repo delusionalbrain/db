@@ -2,6 +2,8 @@
 #include <sys/socket.h> 
 #include <netinet/in.h>
 #include <unistd.h>
+#include "parser.cpp"
+#include "command.cpp"
 using namespace std;
 
 int main() {
