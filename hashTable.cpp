@@ -35,7 +35,40 @@ class hashTable{
         }
         return h % cap;
     }
-
     
+    void set(const string& key, const string& value){
+        int hash = hashFunction(key);
+        Node *head = bucket[hash];
+        if(head==nullptr) {
+            bucket[hash]= new Node(key, value);
+            numberKeys++;
+            return;
+        }
+        while (head != nullptr){
+            if (head->key == key){
+                head->value = value;
+                return;
+            }
+            head = head->next;
+        }
+        bucket[hash] = new Node(key, value);
+        numberKeys++;
+    }
+
+    string get(const string& key){
+        int hash = hashFunction(key);
+        Node* head = bucket[hash];
+        if(head==nullptr){
+            return "No such key found";
+        }else{
+            while(head!=nullptr){
+                if(head->key == key){
+                    return head->value;
+                }
+                head = head->next;
+            }
+            return "No such key found";
+        }
+    }
 };
 
