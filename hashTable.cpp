@@ -70,5 +70,50 @@ class hashTable{
             return "No such key found";
         }
     }
+
+    string dlt(const string& key){
+        int hash = hashFunction(key);
+        Node* head = bucket[hash];
+        if(head==nullptr){
+            return "No such key found";
+        }else{
+            if(bucket[hash]->key==key){
+                bucket[hash] = head->next;
+                delete head;
+                numberKeys--;
+                return "Deleted successfully";
+            }
+            Node *prev = head;
+            head = head->next;
+            while (head != nullptr)
+            {
+                if(head->key == key){
+                    prev->next = head->next;
+                    numberKeys--;
+                    delete head;
+                    return "Deleted successfully";
+                }
+                prev = head;
+                head = head->next;
+            }
+            return "No such key found";
+        }
+    }
+
+    bool exist(const string& key){
+        int hash = hashFunction(key);
+        Node* head = bucket[hash];
+        if(head==nullptr){
+            return false;
+        }else{
+            while(head!=nullptr){
+                if(head->key == key){
+                    return true;
+                }
+                head = head->next;
+            }
+            return false;
+        }
+    }
 };
 
