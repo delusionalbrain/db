@@ -26,15 +26,12 @@ int main() {
         cout << "Client connected!\n";
 
         char buffer[1024] = {};
-
         recv(clientSocket, buffer, sizeof(buffer), 0);
-
         cout << "Received: " << buffer << "\n";
-
-        string response = "+OK\r\n";
-
+        string raw(buffer);
+        vector<string> parts = parse_resp(raw);
+        string response = handle_command(parts);
         send(clientSocket, response.c_str(), response.size(), 0);
-
         close(clientSocket);
     }
     close(serverSocket);
