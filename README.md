@@ -1,4 +1,4 @@
-# Mimir — In-Memory Key-Value Store
+# db — In-Memory Key-Value Store
 
 ## 1. Problem Statement
 
